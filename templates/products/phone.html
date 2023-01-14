@@ -1,0 +1,27 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+    <style type="text/css">
+        .products {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 20%;
+            width: 60%;
+        }
+    </style>
+    <div class="products">
+    {% for product in products %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.brand }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">модель: {{ product.phone_model }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">рейтинг: {{ product.rate }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">описание: {{ product.descriptions }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">цвет: {{ product.color }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">память: {{ product.memory }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">цена: {{ product.price }}</h6>
+                <a href="#" class="card-link">Доп.инфо</a>
+  </div>
+</div>
+    {% endfor %}
+    </div>
+{% endblock %}
