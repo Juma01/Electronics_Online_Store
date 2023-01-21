@@ -12,3 +12,9 @@ class Phone(models.Model):
     create_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     rate = models.FloatField()
+
+
+class Comment(models.Model):
+    text = models.TextField()
+    create_date = models.DateField(auto_now_add=True)
+    product = models.ForeignKey(Phone, on_delete=models.CASCADE)

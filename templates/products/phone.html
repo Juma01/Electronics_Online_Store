@@ -19,7 +19,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">цвет: {{ product.color }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">память: {{ product.memory }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">цена: {{ product.price }}</h6>
-                <a href="#" class="card-link">Доп.инфо</a>
+                <a href="/products/{{ product.id }}" class="card-link">More</a>
   </div>
 </div>
     {% endfor %}
