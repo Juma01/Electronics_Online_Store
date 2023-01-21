@@ -1,4 +1,55 @@
 {% extends 'layouts/index.html' %}
 {% block content %}
-    <h1>{{ product.title }}</h1>
+    <style type="text/css">
+        .product {
+            width: 80%;
+            margin-left: 10%;
+        }
+        .product > h1 {
+            color: blue ;
+        }
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            color: crimson;
+        }
+        .comments_title {
+            margin-top: 20px;
+            color: orangered;
+        }
+        .comment {
+            background: #242b2e;
+            padding: 10px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .product > img {
+            width: 20%;
+            margin-left: 35%;
+        }
+    </style>
+    <div class="product">
+    {% if product.image %}
+        <img src="/media/{{ product.image }}" alt="">
+    {% else %}
+        <img src="/media/no-image.jpg" alt="">
+    {% endif %}
+        <h1>{{ product.brand }}</h1>
+        <h3>{{ product.phone_model }}</h3>
+        <h5>{{ product.descriptions }}</h5>
+        <h5>Rate: {{ product.rate }}</h5>
+        <div class="dates">
+            <h5>{{ product.create_date }}</h5>
+            <h5>{{ product.modified_date }}</h5>
+        </div>
+        <h5 class="comments_title">Comments</h5>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment">
+                    <h5>{{ comment.text }}</h5>
+                    <p>{{ comment.create_date }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

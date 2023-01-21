@@ -1,27 +1,30 @@
 {% extends 'layouts/index.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'produts.css' %}">
+{% endblock %}
+
 {% block content %}
-    <style type="text/css">
-        .products {
-            display: flex;
-            justify-content: space-between;
-            margin-left: 20%;
-            width: 60%;
-        }
-    </style>
     <div class="products">
-    {% for product in products %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.brand }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">модель: {{ product.phone_model }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">рейтинг: {{ product.rate }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">описание: {{ product.descriptions }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">цвет: {{ product.color }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">память: {{ product.memory }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">цена: {{ product.price }}</h6>
-                <a href="/products/{{ product.id }}" class="card-link">More</a>
-  </div>
-</div>
-    {% endfor %}
+        {% for product in products %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    {% if product.image %}
+                        <img class="product_image" src="/media/{{ product.image }}" alt="">
+                    {% else %}
+                        <img class="product_image" src="/media/no-image.jpg" alt="">
+                    {% endif %}
+                    <h5 class="card-title">{{ product.brand }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Mодель: {{ product.phone_model }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Pейтинг: {{ product.rate }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Oписание: {{ product.descriptions }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Цвет: {{ product.color }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Память: {{ product.memory }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Цена: {{ product.price }}</h6>
+                    <a href="/products/{{ product.id }}" class="card-link">Больше инфо.</a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
