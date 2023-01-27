@@ -43,6 +43,16 @@
             <h5>{{ product.modified_date }}</h5>
         </div>
         <h5 class="comments_title">Comments</h5>
+        {% if product.commentable %}
+            <div class="create_comment">
+                <form action="/products/{{ product.id }}/" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Add Comment">
+                </form>
+            </div>
+        {% endif %}
+
         <div class="comments">
             {% for comment in comments %}
                 <div class="comment">

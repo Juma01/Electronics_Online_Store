@@ -12,6 +12,7 @@ class Phone(models.Model):
     create_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     rate = models.FloatField()
+    commentable = models.BooleanField(default=True)
 
 
 class Comment(models.Model):

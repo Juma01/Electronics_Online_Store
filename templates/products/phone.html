@@ -15,8 +15,8 @@
                     {% else %}
                         <img class="product_image" src="/media/no-image.jpg" alt="">
                     {% endif %}
-                    <h5 class="card-title">{{ product.brand }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Mодель: {{ product.phone_model }}</h6>
+                    <h5 class="card-title">{{ product.brand.upper }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Mодель: {{ product.phone_model.capitalize }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Pейтинг: {{ product.rate }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Oписание: {{ product.descriptions }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Цвет: {{ product.color }}</h6>
