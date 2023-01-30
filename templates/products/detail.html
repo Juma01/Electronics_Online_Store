@@ -43,7 +43,7 @@
             <h5>{{ product.modified_date }}</h5>
         </div>
         <h5 class="comments_title">Comments</h5>
-        {% if product.commentable %}
+        {% if product.commentable and not user.is_anonymous %}
             <div class="create_comment">
                 <form action="/products/{{ product.id }}/" method="post">
                     {% csrf_token %}
@@ -56,7 +56,8 @@
         <div class="comments">
             {% for comment in comments %}
                 <div class="comment">
-                    <h5>{{ comment.text }}</h5>
+                    <h5>{{ comment.author.username }}</h5>
+                    <h6>{{ comment.text }}</h6>
                     <p>{{ comment.create_date }}</p>
                 </div>
             {% endfor %}

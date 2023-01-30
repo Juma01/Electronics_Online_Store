@@ -29,7 +29,17 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="#">Home</a>
         <a class="nav-link" href="/products">Телефоны</a>
-        <a class="nav-link" href="/products/create">Create Product</a>
+          {% if user.is_anonymous %}
+              <a class="nav-link" href="/users/login">Login</a>
+              <a class="nav-link" href="/users/register">Register</a>
+          {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="/products/create">Create Product</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/users/logout">Logout</a>
+              </li>
+          {% endif %}
         <a class="nav-link disabled">Disabled</a>
       </div>
     </div>

@@ -14,7 +14,8 @@ def phones_view(request):
     if request.method == 'GET':
         products = Phone.objects.all()
         context = {
-            'products': products
+            'products': products,
+            'user': request.user
         }
         return render(request, 'products/phone.html', context=context)
 
@@ -27,7 +28,8 @@ def phone_detail_view(request, phone_id):
         context = {
             'product': product,
             'comments': comments,
-            'form': CommentCreateForm
+            'form': CommentCreateForm,
+            'user': request.user
         }
         return render(request, 'products/detail.html', context=context)
 
@@ -38,6 +40,7 @@ def phone_detail_view(request, phone_id):
         form = CommentCreateForm(data=request.POST)
         if form.is_valid():
             Comment.objects.create(
+                author=request.user,
                 text=form.cleaned_data.get('text'),
                 product=product
             )
@@ -51,11 +54,13 @@ def phone_detail_view(request, phone_id):
 
 
 def create_product_view(request):
-    if request.method == 'GET':
+    if request.method == 'GET' and not request.user.is_anonymous:
         context = {
             'form': ProductCreateForm
         }
         return render(request, 'products/create.html', context=context)
+    elif request.user.is_anonymous:
+        return redirect('/products')
 
     if request.method == 'POST':
         form = ProductCreateForm(data=request.POST)

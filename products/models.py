@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Phone(models.Model):
@@ -16,6 +17,7 @@ class Phone(models.Model):
 
 
 class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     text = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Phone, on_delete=models.CASCADE)
