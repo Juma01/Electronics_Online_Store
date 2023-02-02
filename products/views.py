@@ -4,6 +4,8 @@ from products.forms import ProductCreateForm, CommentCreateForm
 
 # Create your views here.
 
+PAGINATION_LIMIT = 3
+
 
 def main_view(request):
     if request.method == 'GET':
@@ -13,9 +15,30 @@ def main_view(request):
 def phones_view(request):
     if request.method == 'GET':
         products = Phone.objects.all()
+        search = request.GET.get('search')
+        page = int(request.GET.get('page', 1))
+
+        if search:
+            products = Phone.objects.filter(
+                descriptions__icontains=search
+            ) | Phone.objects.filter(
+                brand__icontains=search
+            )
+
+        """ max page"""
+        max_page = products.__len__() / PAGINATION_LIMIT
+        if round(max_page) < max_page:
+            max_page = round(max_page) + 1
+        else:
+            max_page = round(max_page)
+
+        """ slice products by page """
+        products = products[PAGINATION_LIMIT * (page-1):PAGINATION_LIMIT * page]
+
         context = {
             'products': products,
-            'user': request.user
+            'user': request.user,
+            'max_page': range(1, max_page+1)
         }
         return render(request, 'products/phone.html', context=context)
 
